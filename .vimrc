@@ -115,8 +115,8 @@ map <F9> :execute "tabmove" tabpagenr() - 2<CR>
 map <F10> :execute "tabmove" tabpagenr() + 1<CR>
 
 " switch tab
-nmap <C-Left> :tabprevious<CR>
-nmap <C-Right> :tabnext<CR>
+nmap <C-F9> :tabprevious<CR>
+nmap <C-F10> :tabnext<CR>
 
 " go to the last tab
 if !exists('g:lasttab')
