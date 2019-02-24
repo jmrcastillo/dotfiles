@@ -7,7 +7,10 @@ filetype off
 
 " Resizing splits mouse
 set mouse=a
-set ttymouse=xterm2
+
+if !has('nvim')
+	set ttymouse=xterm2
+endif
 
 " .swp files
 set noswapfile
@@ -111,6 +114,19 @@ nmap tm :tabm
 map <F9> :execute "tabmove" tabpagenr() - 2<CR>
 map <F10> :execute "tabmove" tabpagenr() + 1<CR>
 
+" switch tab
+nmap <C-Left> :tabprevious<CR>
+nmap <C-Right> :tabnext<CR>
+
+" go to the last tab
+if !exists('g:lasttab')
+	let g:lasttab = 1
+endif
+
+nmap <silent> <C-y> :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+" - - - - - -
+
 " Swithch between window splits
 " and  expands the splits to full size
 "
@@ -173,9 +189,6 @@ au bufnewfile,bufread *.css,*.html,*.js,*.c:
 \ set expandtab |
 \ set fileformat=unix |
 
-" semicolon javascript
-"imap <leader> ; <c-o> a;
-" A end of line & C-o input single normal mode
 
 " Nerdtree
 set runtimepath+=~/.vim/bundle/nerdtree
@@ -204,35 +217,13 @@ let g:pymode_python = 'python3'
 "call pathogen#infect()
 "call pathogen#helptags()
 
-" better navigatin throug omnicomplete option list
-" see http://stackoverflow.com/questions/2170023/how-to-map-keys-for
-set completeopt=longest,menuone
-function! OmniPopup(action)
-if pumvisible()
-	if a:action =='j'
-		return "\<C-N>"
-	elseif a:action == 'k'
-		return "\<C-P>"
-	endif
-endif
-return a:action
-endfunction
-
-inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
-inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 " ale
 "set runtimepath+=~/.vim/bundle/ale
-
-" unite
-set runtimepath+=~/.vim/bundle/unite
 
 " vim-javascript
 set runtimepath+=~/.vim/bundle/vim-javascript
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1
-
-" powerline
-set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim
 
 " always show statusline
 set laststatus=2
@@ -240,10 +231,11 @@ set laststatus=2
 " emmet
 set runtimepath+=~/.vim/bundle/emmet-vim
 " emmet use tab
+let g:user_emmet_expandabbr_key = '<Tab>'
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 " emmet html and css only
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+autocmd FileType html,css,htmldjango EmmetInstall
 
 " nerdcommenter
 set runtimepath+=~/.vim/bundle/nerdcommenter
@@ -257,6 +249,15 @@ set runtimepath+=~/.vim/bundle/vim-closetag
 " vim-surround
 set runtimepath+=~/.vim/bundle/vim-surround
 
+" Powerline
+"set runtimepath+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim
+
+"" vim-airline
+"set runtimepath+=~/.vim/bundle/vim-airline
+
+" vim-colorizer
+set runtimepath+=~/.vim/bundle/vim-colorizer
+
 " python syntax
 set runtimepath+=~/.vim/bundle/python-syntax
 let g:python_highlight_all = 1
@@ -265,10 +266,19 @@ let g:python_highlight_all = 1
 set runtimepath+=~/.vim/bundle/tagbar
 nmap <F8> :TagbarToggle<CR>
 
-" indentLine
+" indentline
 set runtimepath+=~/.vim/bundle/indentLine
 let g:indentLine_setColors = 0
 "let g:indentLine_color_term = 20
 "let g:indentLine_bgcolor_term = 202
 let g:indentLine_char = '┆'
 " grateful
+
+" lightline
+set runtimepath+=~/.vim/bundle/lightline.vim
+" lightline
+set laststatus=2
+let g:lightline = {
+	\ 'colorscheme': 'OldHope',
+	\ }
+
