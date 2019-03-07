@@ -1,4 +1,12 @@
+" vundle plugin
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
+" vim tmux navigator
+Plugin 'christoomey/vim-tmux-navigator'
+
+
+call vundle#end()
 
 nmap <C-w>r :source $MYVIMRC <CR>
 
@@ -231,7 +239,7 @@ set laststatus=2
 " emmet
 set runtimepath+=~/.vim/bundle/emmet-vim
 " emmet use tab
-let g:user_emmet_expandabbr_key = ','
+let g:user_emmet_expandabbr_key = ',,'
 "imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 " emmet html and css only
 let g:user_emmet_install_global = 0
@@ -283,4 +291,9 @@ let g:lightline = {
 	\ 'active': {
 	\   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'absolutepath', 'modified' ] ],
         \ },
+	\ 'component': {
+	\    'charvaluehex': '0x%b'
+	\ },
 	\ }
+
+
