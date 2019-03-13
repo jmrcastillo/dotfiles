@@ -130,6 +130,7 @@ alias gcam='git commit -am'
 alias ga='git add'
 alias gaa='git add .'
 alias gr='git reset'
+alias gt='git tree'
 #
 alias gco='git checkout'
 alias gl='git pull'
