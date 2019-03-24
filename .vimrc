@@ -231,8 +231,8 @@ set laststatus=2
 " emmet
 set runtimepath+=~/.vim/bundle/emmet-vim
 " emmet use tab
-let g:user_emmet_expandabbr_key = '<Tab>'
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+let g:user_emmet_expandabbr_key = ','
+"imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 " emmet html and css only
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,htmldjango EmmetInstall
