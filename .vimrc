@@ -111,19 +111,19 @@ nmap <C-w>m <C-w>=
 nmap tm :tabm
 :execute "tabmove" tabpagenr()
 :execute "tabmove" tabpagenr() - 1
-map <F9> :execute "tabmove" tabpagenr() - 2<CR>
-map <F10> :execute "tabmove" tabpagenr() + 1<CR>
+map <C-F9> :execute "tabmove" tabpagenr() - 2<CR>
+map <C-F10> :execute "tabmove" tabpagenr() + 1<CR>
 
 " switch tab
-nmap <C-F9> :tabprevious<CR>
-nmap <C-F10> :tabnext<CR>
+nmap <F9> :tabprevious<CR>
+nmap <F10> :tabnext<CR>
 
 " go to the last tab
 if !exists('g:lasttab')
 	let g:lasttab = 1
 endif
 
-nmap <silent> <C-y> :exe "tabn ".g:lasttab<CR>
+nmap <silent> <C-l>t :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 " - - - - - -
 
@@ -249,7 +249,7 @@ set runtimepath+=~/.vim/bundle/vim-closetag
 " vim-surround
 set runtimepath+=~/.vim/bundle/vim-surround
 
-" Powerline
+" powerline
 "set runtimepath+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim
 
 "" vim-airline
@@ -276,9 +276,11 @@ let g:indentLine_char = '┆'
 
 " lightline
 set runtimepath+=~/.vim/bundle/lightline.vim
-" lightline
+"" lightline
 set laststatus=2
 let g:lightline = {
 	\ 'colorscheme': 'OldHope',
+	\ 'active': {
+	\   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'absolutepath', 'modified' ] ],
+        \ },
 	\ }
-
