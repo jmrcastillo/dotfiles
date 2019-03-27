@@ -1,3 +1,5 @@
+
+
 " vundle plugin
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -7,6 +9,8 @@ Plugin 'christoomey/vim-tmux-navigator'
 
 
 call vundle#end()
+
+"end vundle plugin ----------------------\
 
 nmap <C-w>r :source $MYVIMRC <CR>
 
@@ -27,7 +31,7 @@ set noswapfile
 set nu			" show number
 set relativenumber	" show relative line number
 set nowrap 		" don't automatically wrap on load
-"set fo-=t		" don't automatically wrap text on typing
+set fo-=t		" don't automatically wrap text on typing
 set tw=79		" width of document (used by gd)
 
 " FINDING FILES
@@ -97,7 +101,7 @@ set clipboard=unnamed
 " my vim has no clipboard
 " using xclip - - - - - - sudo apt-get install xclip
 vmap <C-c> :!xclip -f -sel clip<CR>
-map <C-p> :-1r !xclip -o -sel clip<CR>
+map <C-v> :-1r !xclip -o -sel clip<CR>
 
 " split navigation using ctrl jklh
 nmap <silent> <c-j> :wincmd j <CR>
@@ -114,6 +118,12 @@ imap jj <ESC>
 " Maximize , Equal
 nmap <C-w>M <C-w>\|
 nmap <C-w>m <C-w>=
+
+" resizing windows
+nmap 8 <c-w>3<
+nmap 9 <c-w>3>
+nmap 6 <c-w>3+
+nmap 7 <c-w>3-
 
 " move tab <f9> <f10>
 nmap tm :tabm

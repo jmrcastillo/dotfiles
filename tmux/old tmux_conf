@@ -1,0 +1,21 @@
+
+
+tmux has-session -t fullstack
+if [ $? != 0 ]
+then
+	tmux new-session -s fullstack -n editor -d
+	tmux send-keys -t fullstack 'cd ~/Desktop/yhvh/alhamdulillah/fullstack/store' c-m
+	tmux send-keys -t fullstack 'vim' C-m
+	tmux split-window -v -t fullstack
+	tmux select-layout -t fullstack main-horizontal
+	tmux send-keys -t fullstack:0.1 'cd ~/Desktop/yhvh/alhamdulillah/fullstack/store' C-m
+	tmux send-keys -t fullstack:0.1 'workon fullstack' C-m
+	tmux send-keys -t fullstack:0.1 'clear' C-m
+	tmux new-window -n console -t fullstack
+	tmux send-keys -t fullstack:1 'cd ~/Desktop/yhvh/alhamdulillah/fullstack/store' C-m
+	tmux send-keys -t fullstack:1 'workon fullstack' C-m
+	tmux send-keys -t fullstack:1 'clear' C-m
+	tmux select-window -t fullstack:0
+fi
+tmux attach -t fullstack
+

@@ -63,10 +63,7 @@ ZSH_THEME="superjarin"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git,
-  zsh-autosuggestions
-)
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -104,6 +101,7 @@ ${ZSH_DISABLE_COMPFIX:=true}
 bindkey '^n' expand-or-complete
 bindkey '^p' reverse-menu-complete
 
+# virtualwrapper
 WORKON_HOME=~/alhamdulillah
 PROJECT_HOME=~/alhamdulillah
 source /usr/local/bin/virtualenvwrapper.sh
@@ -129,17 +127,47 @@ alias gcm='git commit -m'
 alias gcam='git commit -am'
 alias ga='git add'
 alias gaa='git add .'
-alias gr='git reset'
+alias gre='git reset'
 alias gt='git tree'
 #
 alias gco='git checkout'
 alias gl='git pull'
 alias gpom="git pull origin master"
 alias gp='git push'
-alias gd='git diff | mate'
+alias gd='git diff | vim'
 alias gb='git branch'
 alias gba='git branch -a'
 alias del='git branch -d'
 
+
+# TMUX ALIASES
+alias tks='tmux kill-session -t'
+alias tls='tmux list-session'
+alias tas='tmux attach -t'
 #RELOAD ZSH
 #   source ~/.zshrc
+
+# Tmuxinator
+export EDITOR='vim'
+#source ~/.bin/tmuxinator.zsh
+
+# environment variables django heroku
+export DB_USER="my_db_user"
+export DB_PASSWORD="my_db_pass_123!"
+
+# zshrc vi mode
+#export KEYTIMEOUT=20
+#bindkey -v
+#bindkey -M viins 'jj' vi-cmd-mode
+
+# show status
+#function zle-line-init zle-keymap-select {
+	#RPS1="${${KEYMAP/vicmd/ -- NORMAL -- }/(main|viins)/ -- INSERT --}"
+	#RPS2=$RPS1
+	#zle reset-prompt
+#}
+
+#zle -N zle-line-init
+#zle -N zle-keymap-select
+
+#source /home/yhvh/dotfiles/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
