@@ -48,6 +48,16 @@ set foldmethod=manual	" Defines the type of folding.
 " enable folding with the spacebar
 nmap <space> za
 
+"persistent fold
+augroup auto_save_folds
+	" view files are about 500 bytes
+	" bufleave but not bufwinleave captures closing 2nd tab
+	" nested is need by bufwrite* (if triggered via othe command)
+	autocmd!
+	autocmd BufWinLeave,BufLeave,BufWritePost ?* nested silent! mkview
+	autocmd BufWinEnter ?* silent! loadview
+augroup END
+
 " Display all matching files when we tab complete
 set wildmenu
 
@@ -101,7 +111,7 @@ set clipboard=unnamed
 " my vim has no clipboard
 " using xclip - - - - - - sudo apt-get install xclip
 vmap <C-c> :!xclip -f -sel clip<CR>
-map <C-v> :-1r !xclip -o -sel clip<CR>
+imap <C-v> :-1r !xclip -o -sel clip<CR>
 
 " split navigation using ctrl jklh
 nmap <silent> <c-j> :wincmd j <CR>
