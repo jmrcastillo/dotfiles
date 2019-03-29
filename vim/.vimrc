@@ -154,6 +154,11 @@ endif
 nmap <silent> <C-l>t :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 " - - - - - -
+"
+" buffers toggle
+nmap <F5> :buffers<CR>:buffer<Space>
+" vertical split buffer
+nmap <F6> :vert sb<space>
 
 " Swithch between window splits
 " and  expands the splits to full size
