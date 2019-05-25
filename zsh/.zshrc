@@ -128,7 +128,8 @@ alias gcam='git commit -am'
 alias ga='git add'
 alias gaa='git add .'
 alias gre='git reset'
-alias gt='git tree'
+alias gt='git log --graph --decorate --pretty=oneline --abbrev-commit -n 27'
+alias gta='git log --graph --decorate --pretty=oneline --abbrev-commit'
 #
 alias gco='git checkout'
 alias gl='git pull'
@@ -141,6 +142,7 @@ alias del='git branch -d'
 
 
 # TMUX ALIASES
+alias tmx='tmux'
 alias tks='tmux kill-session -t'
 alias tls='tmux list-session'
 alias tas='tmux attach -t'

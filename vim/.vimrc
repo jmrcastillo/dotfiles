@@ -71,6 +71,9 @@ match ErrorMsg '\s\+$'
 "remove trailing whitespaces automatically
 autocmd BufWritePre * :%s/\s\+$//e
 
+"set list lcs=tab:\⋅\
+set nolist
+set lcs=""
 " Color Scheme
 syntax on
 set t_Co=256
@@ -140,12 +143,14 @@ nmap tm :tabm
 :execute "tabmove" tabpagenr()
 :execute "tabmove" tabpagenr() - 1
 map <C-F9> :execute "tabmove" tabpagenr() - 2<CR>
-map <C-F10> :execute "tabmove" tabpagenr() + 1<CR>
+map <C-f10> :execute "tabmove" tabpagenr() + 1<CR>
 
 " switch tab
 nmap <F9> :tabprevious<CR>
 nmap <F10> :tabnext<CR>
 
+nmap <C-tab>, :tabprevious<CR>
+nmap <F10> :tabnext<CR>
 " go to the last tab
 if !exists('g:lasttab')
 	let g:lasttab = 1
@@ -159,6 +164,12 @@ au TabLeave * let g:lasttab = tabpagenr()
 nmap <F5> :buffers<CR>:buffer<Space>
 " vertical split buffer
 nmap <F6> :buffers<CR>:vert belowright sb<space>
+
+" Buffer List
+nmap <silent> [b :bp<CR>
+nmap <silent> ]b :bn<CR>
+nmap <silent> [B :bfirst<CR>
+nmap <silent> ]B :blast<CR>
 
 " Swithch between window splits
 " and  expands the splits to full size
@@ -263,7 +274,7 @@ set laststatus=2
 
 " emmet
 set runtimepath+=~/.vim/bundle/emmet-vim
-" emmet use tab
+" emmet use ,,
 let g:user_emmet_expandabbr_key = ',,'
 "imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 " emmet html and css only
@@ -305,7 +316,6 @@ let g:indentLine_setColors = 0
 "let g:indentLine_color_term = 20
 "let g:indentLine_bgcolor_term = 202
 let g:indentLine_char = '┆'
-" grateful
 
 " lightline
 set runtimepath+=~/.vim/bundle/lightline.vim
@@ -321,4 +331,9 @@ let g:lightline = {
 	\ },
 	\ }
 
-
+" show leading spaces
+"hi Conceal guibg=NONE ctermbg=NONE ctermfg=DarkGrey
+"autocmd BufWinEnter * setl conceallevel=2 concealcursor=nv
+"autocmd BufWinEnter * syn match LeadingSpace /\(^ *\)\@<= / containedin=ALL conceal cchar=·
+"autocmd BufReadPre * setl conceallevel=2 concealcursor=nv
+"autocmd BufReadPre * syn match LeadingSpace /\(^ *\)\@<= / containedin=ALL conceal cchar=·
