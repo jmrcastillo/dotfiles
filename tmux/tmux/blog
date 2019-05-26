@@ -1,0 +1,42 @@
+
+
+tmux has-session -t blog
+if [ $? != 0 ]
+then
+
+	tmux new-session -s blog -n Git -d
+	#git
+	tmux send-keys -t blog 'cd ~/Desktop/yhvh/alhamdulillah/iChoose/mysite' c-m
+	tmux send-keys -t blog 'workon iChoose' C-m
+	tmux send-keys -t blog 'clear' C-m
+
+	#vim
+	tmux new-window -n editor -t blog
+	tmux send-keys -t blog 'cd ~/Desktop/yhvh/alhamdulillah/iChoose/mysite' c-m
+	tmux send-keys -t blog 'vim' C-m
+	tmux send-keys -t blog ':NERDTreeToggle' C-m
+
+	#runserver
+
+	#1st window
+	tmux new-window -n Runserver -t blog
+	tmux send-keys -t blog 'cd ~/Desktop/yhvh/alhamdulillah/iChoose/mysite' c-m
+	tmux send-keys -t blog:2 'workon iChoose' C-m
+	tmux send-keys -t blog:2 'clear' C-m
+	tmux send-keys -t blog:2 'python manage.py runserver' C-m
+
+	#2st window
+	tmux split-window -v -t blog
+	tmux send-keys -t blog 'cd ~/Desktop/yhvh/alhamdulillah/iChoose/mysite' c-m
+	tmux send-keys -t blog:2 'workon iChoose' C-m
+	tmux send-keys -t blog:2 'clear' C-m
+	tmux send-keys -t blog:2 'htop' C-m
+
+	# main-vertical / main-horizontal
+	#tmux select-layout -t blog main-vertical
+
+	#Select Window
+	tmux select-window -t blog:1
+
+fi
+tmux attach -t blog

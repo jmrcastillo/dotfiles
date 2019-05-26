@@ -1,0 +1,37 @@
+
+tmux has-session -t alhamdulillah
+if [ $? != 0 ]
+then
+	tmux new-session -s alhamdulillah -n Git -d
+	#git
+	tmux send-keys -t alhamdulillah 'cd ~/dotfiles' C-m
+	tmux send-keys -t alhamdulillah 'clear' C-m
+
+	#vim
+	tmux new-window -n editor -t alhamdulillah
+	tmux send-keys -t alhamdulillah 'cd ~/dotfiles' C-m
+	tmux send-keys -t alhamdulillah 'vim' C-m
+
+	#runserver
+
+	#1st window
+	tmux new-window -n Runserver -t alhamdulillah
+	tmux send-keys -t alhamdulillah:2 'cd ~/dotfiles' C-m
+	tmux send-keys -t alhamdulillah 'clear' C-m
+
+	#2st window
+	tmux split-window -v -t alhamdulillah
+	tmux send-keys -t alhamdulillah:2 'cd ~/dotfiles' C-m
+	tmux send-keys -t alhamdulillah 'clear' C-m
+
+	# main-vertical / main-horizontal
+	#tmux select-layout -t alhamdulillah main-vertical
+
+	#Select Window
+	tmux select-window -t alhamdulillah:1
+fi
+tmux attach -t alhamdulillah
+
+#	-t	- target / switch
+#	-h 	- horizontal
+#	-v	- vertical

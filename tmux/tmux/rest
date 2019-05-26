@@ -1,0 +1,41 @@
+
+
+tmux has-session -t rest
+if [ $? != 0 ]
+then
+	tmux new-session -s rest -n Git -d
+	#git
+	tmux send-keys -t rest 'cd ~/Desktop/yhvh/alhamdulillah/rest2/pollsapi' c-m
+	tmux send-keys -t rest 'workon rest2' C-m
+	tmux send-keys -t rest 'clear' C-m
+
+	#vim
+	tmux new-window -n editor -t rest
+	tmux send-keys -t rest 'cd ~/Desktop/yhvh/alhamdulillah/rest2/pollsapi' c-m
+	tmux send-keys -t rest 'vim' C-m
+	tmux send-keys -t rest ':NERDTreeToggle ' C-m
+
+	#runserver
+
+	#1st window
+	tmux new-window -n Runserver -t rest
+	tmux send-keys -t rest:2 'cd ~/Desktop/yhvh/alhamdulillah/rest2/pollsapi' c-m
+	tmux send-keys -t rest:2 'workon rest2' C-m
+	tmux send-keys -t rest:2 'clear' C-m
+	tmux send-keys -t rest:2 'python manage.py runserver' C-m
+
+	#2st window
+	tmux split-window -v -t rest
+	tmux send-keys -t rest:2 'cd ~/Desktop/yhvh/alhamdulillah/rest2/pollsapi' c-m
+	tmux send-keys -t rest:2 'workon rest2' C-m
+	tmux send-keys -t rest:2 'clear' C-m
+	tmux send-keys -t rest:2 'htop' C-m
+
+	# main-vertical / main-horizontal
+	#tmux select-layout -t rest main-vertical
+
+	#Select Window
+	tmux select-window -t rest:1
+
+fi
+tmux attach -t rest

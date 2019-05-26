@@ -148,9 +148,8 @@ map <C-f10> :execute "tabmove" tabpagenr() + 1<CR>
 " switch tab
 nmap <F9> :tabprevious<CR>
 nmap <F10> :tabnext<CR>
+nmap G :tabmove<space>
 
-nmap <C-tab>, :tabprevious<CR>
-nmap <F10> :tabnext<CR>
 " go to the last tab
 if !exists('g:lasttab')
 	let g:lasttab = 1
