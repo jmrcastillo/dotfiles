@@ -1,1 +1,1 @@
-/home/yhvh/.config/nvim/init.vim
+/home/yhvh/Desktop/yhvh/.config/nvim/init.vim

@@ -1,6 +1,6 @@
 
 
 ln -sv ~/dotfiles/.vimrc ~
-
+   -s
 
 https://medium.com/@nikitavoloboev/pretty-and-fast-shell-97ea870f2805

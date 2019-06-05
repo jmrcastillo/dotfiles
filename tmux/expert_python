@@ -1,0 +1,31 @@
+
+
+tmux has-session -t python
+if [ $? != 0 ]
+then
+	tmux new-session -s python -n git -d
+
+	#git
+	tmux send-keys -t python 'cd ~/Desktop/yhvh/alhamdulillah/0\ -\ Python/4\ -\ to\ be\ expert\ in\ python' c-m
+	tmux send-keys -t python 'clear' C-m
+
+	#vim
+	tmux new-window -n editor -t python
+	tmux send-keys -t python 'cd ~/Desktop/yhvh/alhamdulillah/0\ -\ Python/4\ -\ to\ be\ expert\ in\ python' c-m
+	tmux send-keys -t python 'vi' C-m
+
+	tmux split-window -v -t python
+	tmux select-layout -t python main-horizontal
+	tmux send-keys -t python 'cd ~/Desktop/yhvh/alhamdulillah/0\ -\ Python/4\ -\ to\ be\ expert\ in\ python' c-m
+	tmux send-keys -t python 'clear' C-m
+
+	tmux new-window -n editor -t python
+	tmux send-keys -t python 'cd ~/Desktop/yhvh/alhamdulillah/0\ -\ Python/4\ -\ to\ be\ expert\ in\ python' c-m
+	tmux send-keys -t python 'clear' C-m
+	tmux send-keys -t python 'htop' C-m
+	
+	tmux select-window -t python:1
+	tmux select-pane -t 0
+
+fi
+tmux attach -t python

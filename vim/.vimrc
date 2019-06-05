@@ -6,11 +6,18 @@ call vundle#begin()
 
 " vim tmux navigator
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'elzr/vim-json'
+Plugin 'tpope/vim-fugitive'
 
 
 call vundle#end()
 
 "end vundle plugin ----------------------\
+
+"Plugin Settings
+
+"Vim json
+let g:vim_json_syntax_conceal = 0
 
 nmap <C-w>r :source $MYVIMRC <CR>
 
@@ -38,7 +45,6 @@ set tw=79		" width of document (used by gd)
 " Search down into subfolders
 " Provides tab-completion for all file related tasks
 set path+=**
-
 " Set Folding
 set foldenable 		"Enable folding
 set foldlevelstart=10	" Open most of the folds
@@ -139,7 +145,7 @@ nmap 6 <c-w>3+
 nmap 7 <c-w>3-
 
 " move tab <f9> <f10>
-nmap tm :tabm
+nmap tm :tabmove<space>
 :execute "tabmove" tabpagenr()
 :execute "tabmove" tabpagenr() - 1
 map <C-F9> :execute "tabmove" tabpagenr() - 2<CR>
@@ -148,7 +154,6 @@ map <C-f10> :execute "tabmove" tabpagenr() + 1<CR>
 " switch tab
 nmap <F9> :tabprevious<CR>
 nmap <F10> :tabnext<CR>
-nmap G :tabmove<space>
 
 " go to the last tab
 if !exists('g:lasttab')
@@ -231,7 +236,6 @@ au bufnewfile,bufread *.css,*.html,*.js,*.c:
 \ set autoindent |
 \ set expandtab |
 \ set fileformat=unix |
-
 
 " Nerdtree
 set runtimepath+=~/.vim/bundle/nerdtree
@@ -331,8 +335,8 @@ let g:lightline = {
 	\ }
 
 " show leading spaces
-"hi Conceal guibg=NONE ctermbg=NONE ctermfg=DarkGrey
-"autocmd BufWinEnter * setl conceallevel=2 concealcursor=nv
+"hi conceal guibg=none ctermbg=none ctermfg=darkgrey
+"autocmd bufwinenter * setl conceallevel=2 concealcursor=nv
 "autocmd BufWinEnter * syn match LeadingSpace /\(^ *\)\@<= / containedin=ALL conceal cchar=·
 "autocmd BufReadPre * setl conceallevel=2 concealcursor=nv
 "autocmd BufReadPre * syn match LeadingSpace /\(^ *\)\@<= / containedin=ALL conceal cchar=·
