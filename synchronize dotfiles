@@ -3,4 +3,6 @@
 ln -sv ~/dotfiles/.vimrc ~
    -s
 
+ln -s location destination
+
 https://medium.com/@nikitavoloboev/pretty-and-fast-shell-97ea870f2805
