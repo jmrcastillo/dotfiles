@@ -3,6 +3,12 @@
 "call plug#begin('~/.local/share/nvim/bundle')
 call plug#begin('~/.config/nvim/bundle')
 "Plugin List
+"PlugInstall [name]	- Install Plugins
+"PlugUpdate [name]	- Install or update plugins
+"PlugClean[!]		- Removed unused directories
+"PlugUpgrade 		- Upgrade vim-plug itself
+"PlugStatus 		- Check the status of plugins
+"PlugDiff		- Examin Changes from previous update
 
 " Python
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
@@ -23,6 +29,8 @@ Plug 'w0rp/ale'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'elzr/vim-json'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'prettier/vim-prettier'
 
 " Vim
 Plug 'itchyny/lightline.vim'  " same powerline
@@ -90,9 +98,26 @@ let g:lightline = {
 let g:user_emmet_expandabbr_key = ',,'
 "imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
+" javascript
+" vim javascript
+"let g:javascript_plugin_jsdoc = 1
+"let g:javascript_plugin_ngdoc = 1
+"let g:javascript_plugin_flow = 1
+"folding
+
+" vim jsx
+" jsx and js / 1 if jsx only
+"let g:jsx_ext_required = 0
+"let g:jsx_pragma_required = 1
+" vim pretty
+"let g:vim_jsx_pretty_template_tags = []
+"let g:vim_jsx_pretty_colorful_config = 1
+"let g:vim_jsx_pretty_highlight_close_tag = 1
+
+
 " emmet html and css only
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+let g:user_emmet_install_global = 1
+autocmd FileType html,css,js,jsx,htmldjango EmmetInstall
 
 " Vim json
 let g:vim_json_syntax_conceal = 0

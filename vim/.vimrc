@@ -1,68 +1,161 @@
 
+" Reload
+nmap <C-w>r :source $MYVIMRC <CR>
+"call plug#begin('~/.local/share/nvim/bundle')
+call plug#begin('~/.vim/plugged')
+"Plugin List
+"PlugInstall [name]	- Install Plugins
+"PlugUpdate [name]	- Install or update plugins
+"PlugClean[!]		- Removed unused directories
+"PlugUpgrade 		- Upgrade vim-plug itself
+"PlugStatus 		- Check the status of plugins
+"PlugDiff		- Examin Changes from previous update
 
-" vundle plugin
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Python
+Plug 'python-mode/python-mode', { 'branch': 'develop' }
+Plug 'majutsushi/tagbar'
+Plug 'vim-python/python-syntax'   " syntax highlight
 
-" vim tmux navigator
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'elzr/vim-json'
-Plugin 'tpope/vim-fugitive'
+" HTML
+Plug 'mattn/emmet-vim'           " html shortcut
+Plug 'cohama/lexima.vim'         " auto close bracket
+Plug 'alvan/vim-closetag'
+Plug 'tpope/vim-surround'
+Plug 'Yggdroot/indentLine'
+Plug 'scrooloose/nerdcommenter' " comment
+Plug 'lilydjwg/colorizer'
+
+" Javascript
+Plug 'w0rp/ale'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'elzr/vim-json'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'prettier/vim-prettier'
+
+" Vim
+Plug 'itchyny/lightline.vim'  " same powerline
+Plug 'trevordmiller/nova-vim' " Color scheme for vim
+Plug 'scrooloose/nerdtree'
+Plug 'ctrlpvim/ctrlp.vim'     " find files
+
+if has('nvim')
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+	Plug 'Shougo/deoplete.nvim'
+	Plug 'roxma/nvim-yarp'
+	Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+call plug#end()
+
+"  -   -   -   -   -   -   -   -   -   -
+" Plugin Settings
+"  -   -   -   -   -   -   -   -   -   -
+
+" SNIPPETS:
+" Read an empty html template and move cursor to the line
+nmap ,html :-1read $HOME/.config/nvim/.skeleton.html<CR>3jwf<i
+
+" Python Mode
+filetype plugin indent on
+let g:pytmode_python = 'python3'
+
+" Python Syntax
+let g:python_highlight_all = 1
+
+" Deoplete
+"enable deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_delay = 100
+" Tagbar
+nmap <F8> :TagbarToggle<CR>
+
+" NerdTree
+map <C-n> :NERDTreeToggle<CR>
+" Close vim if only nerdtree is open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" IndentLine
+let g:indentLine_setColors = 0
+"let g:indentLine_color_term = 20
+"let g:indentLine_bgcolor_term = 202
+let g:indentLine_char = '┆'
+
+" ctrlp
+let g:ctrlp_max_height=5
+let g:ctrlp_working_path_mode=0
+set wildignore+=*.pyc
+set wildignore+=*_build/*
+set wildignore+=*/coverage/*
+
+" lightline
+set laststatus=2
+let g:lightline = {
+	\ 'colorscheme': 'OldHope',
+	\ }
+
+" emmet use ,,
+let g:user_emmet_expandabbr_key = ',,'
+"imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
+" javascript
+" vim javascript
+"let g:javascript_plugin_jsdoc = 1
+"let g:javascript_plugin_ngdoc = 1
+"let g:javascript_plugin_flow = 1
+
+" vim jsx
+" jsx and js / 1 if jsx only
+let g:jsx_ext_required = 1
+"let g:jsx_pragma_required = 1
+" vim pretty
+"let g:vim_jsx_pretty_template_tags = []
+"let g:vim_jsx_pretty_colorful_config = 1
+"let g:vim_jsx_pretty_highlight_close_tag = 1
 
 
-call vundle#end()
+" emmet html and css only
+let g:user_emmet_install_global = 1
+autocmd FileType html,css,js,jsx,htmldjango EmmetInstall
 
-"end vundle plugin ----------------------\
-
-"Plugin Settings
-
-"Vim json
+" Vim json
 let g:vim_json_syntax_conceal = 0
 
-nmap <C-w>r :source $MYVIMRC <CR>
+
+"  -   -   -   -   -   -   -   -   -   -
+" Settings
+"  -   -   -   -   -   -   -   -   -   -
+
+" Neovim Cursor blinking
+set guicursor=sm:block
+set guicursor=a:blinkon30
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+set guicursor=
 
 set nocompatible
 filetype off
 
-" Resizing splits mouse
-set mouse=a
-
-if !has('nvim')
-	set ttymouse=xterm2
-endif
-
-" .swp files
-set noswapfile
-
 " showing line numbers and length
 set nu			" show number
-set relativenumber	" show relative line number
-set nowrap 		" don't automatically wrap on load
-set fo-=t		" don't automatically wrap text on typing
+set relativenumber 	" show relative line number
+set nowrap		" don't automatically wrap on load
 set tw=79		" width of document (used by gd)
 
-" FINDING FILES
+
+" Finding Files
 " Search down into subfolders
 " Provides tab-completion for all file related tasks
 set path+=**
+
 " Set Folding
 set foldenable 		"Enable folding
 set foldlevelstart=10	" Open most of the folds
 set foldnestmax=10	" Folds can be nested. set a max value
 set foldmethod=manual	" Defines the type of folding.
 
-" enable folding with the spacebar
+" enable folding using spacebar
 nmap <space> za
-
-"persistent fold
-augroup auto_save_folds
-	" view files are about 500 bytes
-	" bufleave but not bufwinleave captures closing 2nd tab
-	" nested is need by bufwrite* (if triggered via othe command)
-	autocmd!
-	autocmd BufWinLeave,BufLeave,BufWritePost ?* nested silent! mkview
-	autocmd BufWinEnter ?* silent! loadview
-augroup END
 
 " Display all matching files when we tab complete
 set wildmenu
@@ -77,9 +170,6 @@ match ErrorMsg '\s\+$'
 "remove trailing whitespaces automatically
 autocmd BufWritePre * :%s/\s\+$//e
 
-"set list lcs=tab:\⋅\
-set nolist
-set lcs=""
 " Color Scheme
 syntax on
 set t_Co=256
@@ -102,10 +192,6 @@ set smartcase
 " remove highlight last search
 map <F4> :nohl <CR>
 
-" buffer next prev
-"map <c-w>< :bprev<CR>
-"map <c-w>> :bnext<CR>
-
 " copy paste clipboard
 set pastetoggle=<f2>
 set clipboard=unnamed
@@ -120,7 +206,7 @@ set clipboard=unnamed
 " my vim has no clipboard
 " using xclip - - - - - - sudo apt-get install xclip
 vmap <C-c> :!xclip -f -sel clip<CR>
-imap <C-v> :-1r !xclip -o -sel clip<CR>
+nmap <C-v> :-1r !xclip -o -sel clip<CR>
 
 " split navigation using ctrl jklh
 nmap <silent> <c-j> :wincmd j <CR>
@@ -149,11 +235,14 @@ nmap tm :tabmove<space>
 :execute "tabmove" tabpagenr()
 :execute "tabmove" tabpagenr() - 1
 map <C-F9> :execute "tabmove" tabpagenr() - 2<CR>
-map <C-f10> :execute "tabmove" tabpagenr() + 1<CR>
+map <C-F10> :execute "tabmove" tabpagenr() + 1<CR>
 
 " switch tab
 nmap <F9> :tabprevious<CR>
 nmap <F10> :tabnext<CR>
+" move tab
+nmap m<F9> :tabmove -<CR>
+nmap m<F10> :tabmove +<CR>
 
 " go to the last tab
 if !exists('g:lasttab')
@@ -162,12 +251,12 @@ endif
 
 nmap <silent> <C-l>t :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
-" - - - - - -
+" -	-	-	-	-	-
 "
 " buffers toggle
 nmap <F5> :buffers<CR>:buffer<Space>
 " vertical split buffer
-nmap <F6> :buffers<CR>:vert belowright sb<space>
+nmap <F6> :vert sb<space>
 
 " Buffer List
 nmap <silent> [b :bp<CR>
@@ -197,6 +286,10 @@ imap <C-d> <esc>:wq!<CR>
 " Quit
 nmap <C-q> :q!<CR>
 imap <C-q> <esc>:q!<CR>
+
+" buffer next prev
+"map <c-w>< :bprev<CR>
+"map <c-w>> :bnext<CR>
 
 "  change background to transparent
 "hi Normal guibg=NONE ctermbg=NONE
@@ -237,106 +330,4 @@ au bufnewfile,bufread *.css,*.html,*.js,*.c:
 \ set expandtab |
 \ set fileformat=unix |
 
-" Nerdtree
-set runtimepath+=~/.vim/bundle/nerdtree
-map <C-n> :NERDTreeToggle<CR>
-" code autocmd vimenter * NERDTree
-" close vim if only nerdtree is open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-
-" ctrlp
-set runtimepath+=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_max_height=5
-let g:ctrlp_working_path_mode=0
-set wildignore+=*.pyc
-set wildignore+=*_build/*
-set wildignore+=*/coverage/*
-
-" SNIPPETS:
-" Read an empty html template and move cursor to the line
-nmap ,html :-1read $HOME/.vim/.skeleton.html<CR>3jwf<i
-
-" pymode
-set runtimepath+=~/.vim/bundle/python-mode
-filetype plugin indent on
-let g:pymode_python = 'python3'
-"call pathogen#infect()
-"call pathogen#helptags()
-
-" ale
-"set runtimepath+=~/.vim/bundle/ale
-
-" vim-javascript
-set runtimepath+=~/.vim/bundle/vim-javascript
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_flow = 1
-
-" always show statusline
-set laststatus=2
-
-" emmet
-set runtimepath+=~/.vim/bundle/emmet-vim
-" emmet use ,,
-let g:user_emmet_expandabbr_key = ',,'
-"imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
-" emmet html and css only
-let g:user_emmet_install_global = 0
-autocmd FileType html,css,htmldjango EmmetInstall
-
-" nerdcommenter
-set runtimepath+=~/.vim/bundle/nerdcommenter
-
-" lexima
-set runtimepath+=~/.vim/bundle/lexima
-
-" vim-closetag
-set runtimepath+=~/.vim/bundle/vim-closetag
-
-" vim-surround
-set runtimepath+=~/.vim/bundle/vim-surround
-
-" powerline
-"set runtimepath+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim
-
-"" vim-airline
-"set runtimepath+=~/.vim/bundle/vim-airline
-
-" vim-colorizer
-set runtimepath+=~/.vim/bundle/vim-colorizer
-
-" python syntax
-set runtimepath+=~/.vim/bundle/python-syntax
-let g:python_highlight_all = 1
-
-" tagbar
-set runtimepath+=~/.vim/bundle/tagbar
-nmap <F8> :TagbarToggle<CR>
-
-" indentline
-set runtimepath+=~/.vim/bundle/indentLine
-let g:indentLine_setColors = 0
-"let g:indentLine_color_term = 20
-"let g:indentLine_bgcolor_term = 202
-let g:indentLine_char = '┆'
-
-" lightline
-set runtimepath+=~/.vim/bundle/lightline.vim
-"" lightline
-set laststatus=2
-let g:lightline = {
-	\ 'colorscheme': 'OldHope',
-	\ 'active': {
-	\   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'absolutepath', 'modified' ] ],
-        \ },
-	\ 'component': {
-	\    'charvaluehex': '0x%b'
-	\ },
-	\ }
-
-" show leading spaces
-"hi conceal guibg=none ctermbg=none ctermfg=darkgrey
-"autocmd bufwinenter * setl conceallevel=2 concealcursor=nv
-"autocmd BufWinEnter * syn match LeadingSpace /\(^ *\)\@<= / containedin=ALL conceal cchar=·
-"autocmd BufReadPre * setl conceallevel=2 concealcursor=nv
-"autocmd BufReadPre * syn match LeadingSpace /\(^ *\)\@<= / containedin=ALL conceal cchar=·
