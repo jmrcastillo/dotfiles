@@ -95,6 +95,9 @@ let g:lightline = {
 	\ 'colorscheme': 'OldHope',
 	\ }
 
+" closetag
+let g:closetag_filenames = '*.html,*.xhtml,*.css,*.js,*.jsx'
+
 " emmet use ,,
 let g:user_emmet_expandabbr_key = ',,'
 "imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
@@ -132,6 +135,10 @@ set guicursor=sm:block
 set guicursor=a:blinkon30
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 set guicursor=
+
+" move to another line
+nmap <C-up> <Up>ddp<Up>
+nmap <C-down> ddp
 
 set nocompatible
 filetype off
@@ -330,4 +337,19 @@ au bufnewfile,bufread *.css,*.html,*.js,*.c:
 \ set expandtab |
 \ set fileformat=unix |
 
+" json
+au BufNewFile,BufRead *.json set filetype=json
+
+augroup json_autocmd
+	autocmd!
+	autocmd FileType json setlocal autoindent
+	autocmd FileType json setlocal tabstop=2
+	autocmd FileType json setlocal shiftwidth=2
+	autocmd FileType json setlocal softtabstop=2
+	autocmd FileType json setlocal formatoptions=tcq21
+	autocmd FileType json setlocal foldmethod=syntax
+augroup END
+
+" yaml
+au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
