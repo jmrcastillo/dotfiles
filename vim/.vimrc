@@ -24,6 +24,10 @@ Plug 'tpope/vim-surround'
 Plug 'Yggdroot/indentLine'
 Plug 'scrooloose/nerdcommenter' " comment
 Plug 'lilydjwg/colorizer'
+" svg css
+Plug 'othree/html5.vim'
+Plug 'othree/svg-properties-syntax.vim'
+
 
 " Javascript
 Plug 'w0rp/ale'
@@ -38,14 +42,16 @@ Plug 'itchyny/lightline.vim'  " same powerline
 Plug 'trevordmiller/nova-vim' " Color scheme for vim
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'     " find files
+Plug 'ryanoasis/vim-devicons'
+Plug 'vwxyutarooo/nerdtree-devicons-syntax'
 
-if has('nvim')
-	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-	Plug 'Shougo/deoplete.nvim'
-	Plug 'roxma/nvim-yarp'
-	Plug 'roxma/vim-hug-neovim-rpc'
-endif
+"if has('nvim')
+	"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"else
+	"Plug 'Shougo/deoplete.nvim'
+	"Plug 'roxma/nvim-yarp'
+	"Plug 'roxma/vim-hug-neovim-rpc'
+"endif
 
 call plug#end()
 
@@ -55,11 +61,11 @@ call plug#end()
 
 " SNIPPETS:
 " Read an empty html template and move cursor to the line
-nmap ,html :-1read $HOME/.config/nvim/.skeleton.html<CR>3jwf<i
+nmap ,html :-1read $HOME/.vim/.skeleton.html<CR>3jwf<i
 
 " Python Mode
 filetype plugin indent on
-let g:pytmode_python = 'python3'
+let g:pymode_python = 'python3'
 
 " Python Syntax
 let g:python_highlight_all = 1
@@ -125,6 +131,10 @@ autocmd FileType html,css,js,jsx,htmldjango EmmetInstall
 " Vim json
 let g:vim_json_syntax_conceal = 0
 
+" Vim devicons
+set encoding=utf8
+" change folder orange
+highlight! link NERDTreeFlags NERDTreeDir
 
 "  -   -   -   -   -   -   -   -   -   -
 " Settings
@@ -160,6 +170,16 @@ set foldenable 		"Enable folding
 set foldlevelstart=10	" Open most of the folds
 set foldnestmax=10	" Folds can be nested. set a max value
 set foldmethod=manual	" Defines the type of folding.
+
+" backspace
+set backspace=indent,eol,start
+
+" save fold
+augroup remember_folds
+	autocmd!
+	autocmd BufWrite * mkview
+	autocmd BufRead * silent! loadview
+augroup END
 
 " enable folding using spacebar
 nmap <space> za
@@ -198,6 +218,7 @@ set smartcase
 
 " remove highlight last search
 map <F4> :nohl <CR>
+map nh :nohl <CR>
 
 " copy paste clipboard
 set pastetoggle=<f2>
@@ -266,12 +287,25 @@ nmap <F5> :buffers<CR>:buffer<Space>
 nmap <F6> :vert sb<space>
 
 " Buffer List
-nmap <silent> [b :bp<CR>
-nmap <silent> ]b :bn<CR>
-nmap <silent> [B :bfirst<CR>
-nmap <silent> ]B :blast<CR>
+nmap <silent> bp :bp<CR>
+nmap <silent> bn :bn<CR>
+nmap <silent> bP :bfirst<CR>
+nmap <silent> bN :blast<CR>
 
-" Swithch between window splits
+" Command Mode
+cmap bl <C-u><esc>
+
+" Find vimgrep
+" :vimgrep jibr **/*.py
+" open list ---> ovg
+nmap vg :vimgrep<space>
+" open vimgrep
+nmap ovg :cw<CR>
+
+" search and replace
+nmap sr yiw:%s/\<<C-r>"\>//gc<left><left><left>
+
+" Switch between window splits
 " and  expands the splits to full size
 "
 " Move vertically in the window through the
@@ -293,6 +327,9 @@ imap <C-d> <esc>:wq!<CR>
 " Quit
 nmap <C-q> :q!<CR>
 imap <C-q> <esc>:q!<CR>
+
+" Mouse
+set mouse=a
 
 " buffer next prev
 "map <c-w>< :bprev<CR>
@@ -337,6 +374,13 @@ au bufnewfile,bufread *.css,*.html,*.js,*.c:
 \ set expandtab |
 \ set fileformat=unix |
 
+" Javascript shortcut
+imap cll console.log("")<Esc>==f(<right>a
+imap ljs <script src=".js"> </script> <left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
+
+" Css Shortcut
+imap lcs <link rel="stylesheet" type="text/css" href=".css"><left><left><left><left><left><left>
+
 " json
 au BufNewFile,BufRead *.json set filetype=json
 
@@ -352,4 +396,16 @@ augroup END
 
 " yaml
 au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" c/c++
+au BufRead,BufNewFIle *.h,*.c:
+\ set filetype=c.doxygen |
+\ set colorcolumn=90 |
+\ set hi ColorColumn ctermbg=darkgray |
+
+" compile c/c++ -
+" 	% current file
+" 	< remove extension and dot
+nmap cpr :!gcc % -o %< && ./%< <CR>
+nmap cpr :!g++ % -o %< && ./%< <CR>
 

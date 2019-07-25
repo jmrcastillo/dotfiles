@@ -1,3 +1,6 @@
+#RELOAD ZSH
+#   source ~/.zshrc
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -10,6 +13,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 #ZSH_THEME="powerlevel9k/powerlevel9k"
 ZSH_THEME="superjarin"
+
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -63,7 +67,7 @@ ZSH_THEME="superjarin"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -102,18 +106,35 @@ bindkey '^n' expand-or-complete
 bindkey '^p' reverse-menu-complete
 
 # virtualwrapper
-WORKON_HOME=~/alhamdulillah
-PROJECT_HOME=~/alhamdulillah
+WORKON_HOME=~/Envs
+MSYS_HOME=~/Envs/jibreel
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 source /usr/local/bin/virtualenvwrapper.sh
 
 #if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]];then
 #	source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 #fi
 
+# TMUX
 [ -z "$TMUX" ] && export TERM=xterm-256color
+alias tdv='~/dotfiles/tmux/tmux/tmux-dev'
 
 # Disable Ctrl-s for freezing in vim - ctrl-q
 stty -ixon
+
+#Python
+alias python='python3.6'
+alias python3='python3.6'
+
+# pipenv
+alias psh='pipenv shell '
+alias prn='pipenv run '
+alias pin='pipenv install '
+alias pgr='pipenv graph '
+alias pfr='pipenv lock -r '
+alias plc='pipenv lock '
+alias pun='pipenv uninstall '
+alias ext='exit'
 
 ## neovim
 #alias nvim='nvim -c "source .config/nvim/init.vim"'
@@ -122,40 +143,89 @@ stty -ixon
 source ~/dotfiles/zsh/keybindings.sh
 
 #GIT ALIASES
+
+# git add message
+alias ga='git add'
+alias gaa='git add .'
 alias gst='git status'
 alias gcm='git commit -m'
 alias gcam='git commit -am'
-alias ga='git add'
-alias gaa='git add .'
-alias gre='git reset'
+
+# git reset
+alias gre='git reset --hard HEAD~'
+alias gro='git reset --hard '
+alias gru='git reset --hard ORIG_HEAD'
+
+# git decorate
 alias gt='git log --graph --decorate --pretty=oneline --abbrev-commit -n 27'
 alias gta='git log --graph --decorate --pretty=oneline --abbrev-commit'
-#
-alias gco='git checkout'
-alias gl='git pull'
-alias gpom="git pull origin master"
-alias gp='git push'
-alias gd='git diff | vim'
-alias gb='git branch'
-alias gba='git branch -a'
-alias del='git branch -d'
 
+# git push fetch pull
+alias gp='git push'
+alias gpl='git pull'
+alias pfc='git fetch'
+alias gpom="git pull origin master"
+
+# git squash
+alias grb="git rebase -i HEAD~6"
+# change pick to squash
+# - pick
+# - squash
+# - squash
+
+# git branch
+alias ggb='git branch'
+alias gba='git branch -a'
+alias gbd='git branch -d'
+alias gco='git checkout'
+
+# git remote
+alias grv='git remote -v'
+alias gra='git remote add '
+# gra ssh-bb git@bitbucket.org:jmrcastillo/dotfiles.git
+alias grr='git remote remove '
+# grr origin
+alias grs='git remote show '
+# grs ssh-bb
+
+# git diff show in vim
+alias gdv='git diff . | vi -'
+
+# heroku
+alias hrb="git commit --allow-empty -m 'empty commit' && git push heroku master"
+
+### TERMINAL SHORTCUT
+
+# sudo
+alias sai='sudo apt-get install '
+alias sud='sudo apt-get update '
+alias sug='sudo apt-get upgrade '
+
+# ls
+alias lsa='ls -al' 		# list all files
+alias lsr='ls -l'
+alias lsd='ls -ld */'		# list only directories
+alias lsg='ls -a | grep '	# list and grep
+alias fsd='find . -type f -name "*.sw[klmnop]" -delete'
+
+# nautilus
+alias nts='pkill -f '
+
+# kill
+alias pkl='pkill -f '
 
 # TMUX ALIASES
 alias tmx='tmux'
 alias tks='tmux kill-session -t'
 alias tls='tmux list-session'
 alias tas='tmux attach -t'
-#RELOAD ZSH
-#   source ~/.zshrc
+
+# vim alias
+alias vi='vim'
 
 # Tmuxinator
 export EDITOR='vim'
 #source ~/.bin/tmuxinator.zsh
-
-# environment variables django heroku
-export DB_USER="my_db_user"
-export DB_PASSWORD="my_db_pass_123!"
 
 # zshrc vi mode
 #export KEYTIMEOUT=20
@@ -173,3 +243,15 @@ export DB_PASSWORD="my_db_pass_123!"
 #zle -N zle-keymap-select
 
 #source /home/yhvh/dotfiles/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# LINUX UBUNTU SUBSYSTEM
+alias who='cd /mnt/c/Users/yhvh/'
+alias mnte='cd /mnt/e/0\ -\ Today\ IChoose\ 2019/Windows10'
+
+# username
+#PROMPT="%{% ${PROMPT}"
+
+# jibreel@dm [] ~
+# PROMPT="%{$fg_bold[cyan]%} jibreel@%n % ${PROMPT}"
+
+# jibreel@dm ~
+# PROMPT="%{$fg_bold[cyan]%} %n% ${PROMPT} "

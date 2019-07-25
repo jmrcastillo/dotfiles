@@ -1,0 +1,8 @@
+#!/bin/sh
+tmux new-session -n jibreel \; \
+	send-keys 'htop' C-m \; \
+	new-window -n Editor \; \
+	send-keys 'vi' C-m \; \
+	new-window -n Git \; \
+	select-window -t 1 \; \
+	select-pane -t 0 \;

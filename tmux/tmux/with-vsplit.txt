@@ -1,0 +1,11 @@
+#!/bin/sh
+tmux new-session -n Git \; \
+	new-window -n Editor \; \
+	send-keys 'vi' C-m \; \
+	split-window -v -p 30 \; \
+	new-window -n Runserver \; \
+	split-window -v \; \
+	send-keys 'htop' C-m \; \
+	select-window -t 1 \; \
+	select-pane -t 0 \;
+
