@@ -163,7 +163,7 @@ alias gta='git log --graph --decorate --pretty=oneline --abbrev-commit'
 # git push fetch pull
 alias gp='git push'
 alias gpl='git pull'
-alias pfc='git fetch'
+alias gfc='git fetch'
 alias gpom="git pull origin master"
 
 # git squash

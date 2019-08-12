@@ -44,6 +44,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'     " find files
 Plug 'ryanoasis/vim-devicons'
 Plug 'vwxyutarooo/nerdtree-devicons-syntax'
+Plug 'airblade/vim-gitgutter'
+Plug 'severin-lemaignan/vim-minimap'
 
 "if has('nvim')
 	"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -58,10 +60,6 @@ call plug#end()
 "  -   -   -   -   -   -   -   -   -   -
 " Plugin Settings
 "  -   -   -   -   -   -   -   -   -   -
-
-" SNIPPETS:
-" Read an empty html template and move cursor to the line
-nmap ,html :-1read $HOME/.vim/.skeleton.html<CR>3jwf<i
 
 " Python Mode
 filetype plugin indent on
@@ -123,7 +121,6 @@ let g:jsx_ext_required = 1
 "let g:vim_jsx_pretty_colorful_config = 1
 "let g:vim_jsx_pretty_highlight_close_tag = 1
 
-
 " emmet html and css only
 let g:user_emmet_install_global = 1
 autocmd FileType html,css,js,jsx,htmldjango EmmetInstall
@@ -136,276 +133,29 @@ set encoding=utf8
 " change folder orange
 highlight! link NERDTreeFlags NERDTreeDir
 
+" Gitgutter
+nmap git :GitGutterToggle<CR>
+
+" minimap
+let g:minimap_highlight='Visual'
+
 "  -   -   -   -   -   -   -   -   -   -
 " Settings
 "  -   -   -   -   -   -   -   -   -   -
 
-" Neovim Cursor blinking
-set guicursor=sm:block
-set guicursor=a:blinkon30
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
-set guicursor=
-
-" move to another line
-nmap <C-up> <Up>ddp<Up>
-nmap <C-down> ddp
-
-set nocompatible
-filetype off
-
-" showing line numbers and length
-set nu			" show number
-set relativenumber 	" show relative line number
-set nowrap		" don't automatically wrap on load
-set tw=79		" width of document (used by gd)
-
-
-" Finding Files
-" Search down into subfolders
-" Provides tab-completion for all file related tasks
-set path+=**
-
-" Set Folding
-set foldenable 		"Enable folding
-set foldlevelstart=10	" Open most of the folds
-set foldnestmax=10	" Folds can be nested. set a max value
-set foldmethod=manual	" Defines the type of folding.
-
-" backspace
-set backspace=indent,eol,start
-
-" save fold
-augroup remember_folds
-	autocmd!
-	autocmd BufWrite * mkview
-	autocmd BufRead * silent! loadview
-augroup END
-
-" enable folding using spacebar
-nmap <space> za
-
-" Display all matching files when we tab complete
-set wildmenu
-
-" show whitespace
-" must be inserted before colorscheme command
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=DarkCyan ctermfg=DarkCyan guifg=DarkCyan  guibg=DarkCyan
-
-" highlight trailing whitespace
-match ErrorMsg '\s\+$'
-
-"remove trailing whitespaces automatically
-autocmd BufWritePre * :%s/\s\+$//e
-
-" Color Scheme
-syntax on
-set t_Co=256
-set background=dark
-set termguicolors
-colorscheme vim-material
-
-" color of nonText
-"hi NonText guibg=ivory4
-
-" Color of Number
-hi CursorLineNr ctermfg=6 cterm=bold gui=bold guifg=DarkCyan
-
-" make search case insensitive
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-
-" remove highlight last search
-map <F4> :nohl <CR>
-map nh :nohl <CR>
-
-" copy paste clipboard
-set pastetoggle=<f2>
-set clipboard=unnamed
-" need xterm_clipboard see at :version
-"nmap <c-c> "*y
-"vmap <c-c> "*y
-"vmap <c-p> "*p
-
-"vmap <c-c> :w! /tmp/vitmp<cr>
-"nmap <c-p> :r! cat /tmp/vitmp<cr>
-
-" my vim has no clipboard
-" using xclip - - - - - - sudo apt-get install xclip
-vmap <C-c> :!xclip -f -sel clip<CR>
-nmap <C-v> :-1r !xclip -o -sel clip<CR>
-
-" split navigation using ctrl jklh
-nmap <silent> <c-j> :wincmd j <CR>
-nmap <silent> <c-k> :wincmd k <CR>
-nmap <silent> <c-l> :wincmd l <CR>
-nmap <silent> <c-h> :wincmd h <CR>
-
-" select all
-map <c-a> ggVG <CR>
-
-" change esc to jj
-imap jj <ESC>
-
-" Maximize , Equal
-nmap <C-w>M <C-w>\|
-nmap <C-w>m <C-w>=
-
-" resizing windows
-nmap 8 <c-w>3<
-nmap 9 <c-w>3>
-nmap 6 <c-w>3+
-nmap 7 <c-w>3-
-
-" move tab <f9> <f10>
-nmap tm :tabmove<space>
-:execute "tabmove" tabpagenr()
-:execute "tabmove" tabpagenr() - 1
-map <C-F9> :execute "tabmove" tabpagenr() - 2<CR>
-map <C-F10> :execute "tabmove" tabpagenr() + 1<CR>
-
-" switch tab
-nmap <F9> :tabprevious<CR>
-nmap <F10> :tabnext<CR>
-" move tab
-nmap m<F9> :tabmove -<CR>
-nmap m<F10> :tabmove +<CR>
-
-" go to the last tab
-if !exists('g:lasttab')
-	let g:lasttab = 1
-endif
-
-nmap <silent> <C-l>t :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
-" -	-	-	-	-	-
+" Seperate File
 "
-" buffers toggle
-nmap <F5> :buffers<CR>:buffer<Space>
-" vertical split buffer
-nmap <F6> :vert sb<space>
+" Settings
+source ~/dotfiles/vim/settings/settings.vim
+" Neovim Settings
+source ~/dotfiles/vim/settings/neovim.vim
+" Find Grep Settings
+source ~/dotfiles/vim/settings/find_grep.vim
 
-" Buffer List
-nmap <silent> bp :bp<CR>
-nmap <silent> bn :bn<CR>
-nmap <silent> bP :bfirst<CR>
-nmap <silent> bN :blast<CR>
-
-" Command Mode
-cmap bl <C-u><esc>
-
-" Find vimgrep
-" :vimgrep jibr **/*.py
-" open list ---> ovg
-nmap vg :vimgrep<space>
-" open vimgrep
-nmap ovg :cw<CR>
-
-" search and replace
-nmap sr yiw:%s/\<<C-r>"\>//gc<left><left><left>
-
-" Switch between window splits
-" and  expands the splits to full size
-"
-" Move vertically in the window through the
-" horizontal splits...
-map <c-w>j <c-j><c-w>_
-map <c-w>k <c-k><c-w>_
-
-" Move horizontally in the window through
-" the vertical splits...
-map <c-w>h <c-h><c-w>\|
-map <c-w>l <c-l><c-w>\|
-
-" Save  - Put to .zshrc stty-ixon
-nmap <C-s> :w<CR>
-imap <C-s> <esc>:w<CR>a
-" Save and Exit
-nmap <C-d> :wq!<CR>
-imap <C-d> <esc>:wq!<CR>
-" Quit
-nmap <C-q> :q!<CR>
-imap <C-q> <esc>:q!<CR>
-
-" Mouse
-set mouse=a
-
-" buffer next prev
-"map <c-w>< :bprev<CR>
-"map <c-w>> :bnext<CR>
-
-"  change background to transparent
-"hi Normal guibg=NONE ctermbg=NONE
-"hi NonText cterm=NONE ctermfg=66 ctermbg=23 gui=NONE guibg=#002b36 guifg=#839496
-
-" toggle transparent
-let t:is_transparent = 1
-function! Toggle_transparent()
-if t:is_transparent == 1
-	hi normal guibg=NONE ctermbg=NONE
-	let t:is_transparent = 0
-
-else
-	set background=dark
-	let t:is_transparent = 1
-endif
-endfunction
-
-nnoremap <c-t> :call Toggle_transparent()
-
-" pep 8 indentation
-au bufnewfile,bufread *.py
-\ set tabstop=4 |
-\ set softtabstop=4 |
-\ set shiftwidth=4 |
-\ set textwidth=79 |
-\ set expandtab |
-\ set autoindent |
-\ set fileformat=unix |
-\ hi colorcolumn ctermbg=gray guibg=gray15 |
-\ set colorcolumn=80 |
-
-au bufnewfile,bufread *.css,*.html,*.js,*.c:
-\ set tabstop=4 |
-\ set softtabstop=4 |
-\ set shiftwidth=4 |
-\ set autoindent |
-\ set expandtab |
-\ set fileformat=unix |
-
-" Javascript shortcut
-imap cll console.log("")<Esc>==f(<right>a
-imap ljs <script src=".js"> </script> <left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
-
-" Css Shortcut
-imap lcs <link rel="stylesheet" type="text/css" href=".css"><left><left><left><left><left><left>
-
-" json
-au BufNewFile,BufRead *.json set filetype=json
-
-augroup json_autocmd
-	autocmd!
-	autocmd FileType json setlocal autoindent
-	autocmd FileType json setlocal tabstop=2
-	autocmd FileType json setlocal shiftwidth=2
-	autocmd FileType json setlocal softtabstop=2
-	autocmd FileType json setlocal formatoptions=tcq21
-	autocmd FileType json setlocal foldmethod=syntax
-augroup END
-
-" yaml
-au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-
-" c/c++
-au BufRead,BufNewFIle *.h,*.c:
-\ set filetype=c.doxygen |
-\ set colorcolumn=90 |
-\ set hi ColorColumn ctermbg=darkgray |
-
-" compile c/c++ -
-" 	% current file
-" 	< remove extension and dot
-nmap cpr :!gcc % -o %< && ./%< <CR>
-nmap cpr :!g++ % -o %< && ./%< <CR>
-
+"Programming Settings
+" Html css js json yaml
+source ~/dotfiles/vim/settings/1-htmlCssJs.vim
+" C and C++
+source ~/dotfiles/vim/settings/2-c.vim
+" Python
+source ~/dotfiles/vim/settings/3-python.vim
