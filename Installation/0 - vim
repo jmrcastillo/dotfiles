@@ -1,0 +1,22 @@
+
+
+Install
+	- sudo apt install vim tmux curl ctags xclip
+
+
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+
+vim
+	:PlugInstall
+
+copy 
+
+	colors --> ~/.vim/colors
+
+copy devicons
+
+	fonts --> ~/.fonts
+	.tmux.conf
+	.vimrc

@@ -12,3 +12,5 @@ au bufnewfile,bufread *.py
 \ hi colorcolumn ctermbg=gray guibg=gray15 |
 \ set colorcolumn=80 |
 
+" shortcut python print
+imap ,pr print("")<ESC>==f(<right>a

@@ -1,0 +1,29 @@
+
+
+Install
+	sudo apt install zsh git vim tmux tree
+
+
+Activate
+
+	- which zsh
+	- chsh -s /usr/bin/zsh
+	- ech $SHELL
+	- restart terminal / os
+
+Install o-my-zsh
+
+	- wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
+
+Plugins
+
+	- git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+	- git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+
+Copy dotfiles .zshrc --> Home
+
+	
+
+
+

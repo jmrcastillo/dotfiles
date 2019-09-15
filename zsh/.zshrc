@@ -105,11 +105,16 @@ ${ZSH_DISABLE_COMPFIX:=true}
 bindkey '^n' expand-or-complete
 bindkey '^p' reverse-menu-complete
 
+#Python
+alias python='python3.6'
+alias python3='python3.6'
+#alias pip='pip3'
+
 # virtualwrapper
-WORKON_HOME=~/Envs
-MSYS_HOME=~/Envs/jibreel
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh
+#WORKON_HOME=~/Envs
+#MSYS_HOME=~/Envs/jibreel
+#export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+#source /usr/local/bin/virtualenvwrapper.sh
 
 #if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]];then
 #	source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
@@ -122,13 +127,10 @@ alias tdv='~/dotfiles/tmux/tmux/tmux-dev'
 # Disable Ctrl-s for freezing in vim - ctrl-q
 stty -ixon
 
-#Python
-alias python='python3.6'
-alias python3='python3.6'
-
 # pipenv
+alias pen="pipenv "
 alias psh='pipenv shell '
-alias prn='pipenv run '
+alias prn='pipenv run python '
 alias pin='pipenv install '
 alias pgr='pipenv graph '
 alias pfr='pipenv lock -r '
@@ -139,6 +141,7 @@ alias ext='exit'
 ## neovim
 #alias nvim='nvim -c "source .config/nvim/init.vim"'
 
+# zsh plugins
 # Keybinds
 source ~/dotfiles/zsh/keybindings.sh
 
@@ -191,8 +194,14 @@ alias grs='git remote show '
 # git diff show in vim
 alias gdv='git diff . | vi -'
 
+# remove git
+alias grm='rm -rf .git'
+
 # heroku
 alias hrb="git commit --allow-empty -m 'empty commit' && git push heroku master"
+
+# IP
+alias ipc='ip -c a'
 
 ### TERMINAL SHORTCUT
 
@@ -201,15 +210,22 @@ alias sai='sudo apt-get install '
 alias sud='sudo apt-get update '
 alias sug='sudo apt-get upgrade '
 
+# Edit vim zsh
+alias vis='cd ~/dotfiles/vim/ && vi'
+alias ezs='vi ~/dotfiles/zsh/.zshrc'
+alias etm='vi ~/.tmux.conf'
+
 # ls
 alias lsa='ls -al' 		# list all files
 alias lsr='ls -l'
 alias lsd='ls -ld */'		# list only directories
+alias lss='ls | sort'
 alias lsg='ls -a | grep '	# list and grep
 alias fsd='find . -type f -name "*.sw[klmnop]" -delete'
 
 # nautilus
-alias nts='pkill -f '
+alias nts='nautilus .'
+alias tre='tree'
 
 # kill
 alias pkl='pkill -f '
@@ -242,7 +258,6 @@ export EDITOR='vim'
 #zle -N zle-line-init
 #zle -N zle-keymap-select
 
-#source /home/yhvh/dotfiles/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # LINUX UBUNTU SUBSYSTEM
 alias who='cd /mnt/c/Users/yhvh/'
 alias mnte='cd /mnt/e/0\ -\ Today\ IChoose\ 2019/Windows10'

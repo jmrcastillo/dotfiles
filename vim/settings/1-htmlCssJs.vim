@@ -4,7 +4,7 @@
 " Read an empty html template and move cursor to the line
 nmap ,html :-1read $HOME/.vim/.skeleton.html<CR>3jwf<i
 
-au bufnewfile,bufread *.css,*.html,*.js,*.c:
+au bufnewfile,bufread *.css,*.html,*.js:
 \ set tabstop=4 |
 \ set softtabstop=4 |
 \ set shiftwidth=4 |
@@ -12,12 +12,12 @@ au bufnewfile,bufread *.css,*.html,*.js,*.c:
 \ set expandtab |
 \ set fileformat=unix |
 
-" javascript shortcut
-imap cll console.log("")<Esc>==f(<right>a
-imap ljs <script src=".js"> </script> <left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
-
-" Css Shortcut
-imap lcs <link rel="stylesheet" type="text/css" href=".css"><left><left><left><left><left><left>
+" console log shortcut
+imap ,cl console.log("")<Esc>==f(<right>a
+" shortcut link js
+imap ,ljs <script src=".js"> </script><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
+" shortcut link css
+imap ,lcs <link rel="stylesheet" type="text/css"href=".css"><left><left><left><left><left><left>
 
 " json
 au BufNewFile,BufRead *.json set filetype=json
