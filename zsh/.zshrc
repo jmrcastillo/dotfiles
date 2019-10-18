@@ -108,6 +108,7 @@ bindkey '^p' reverse-menu-complete
 #Python
 alias python='python3.6'
 alias python3='python3.6'
+alias pmo='python -m '
 #alias pip='pip3'
 
 # virtualwrapper

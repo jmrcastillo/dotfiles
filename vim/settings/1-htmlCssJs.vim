@@ -2,15 +2,17 @@
 
 " SNIPPETS:
 " Read an empty html template and move cursor to the line
-nmap ,html :-1read $HOME/.vim/.skeleton.html<CR>3jwf<i
+"nmap ,html :-1read $HOME/.vim/.skeleton.html<CR>3jwf<i
+nmap ,html :-1read ~/dotfiles/vim/.skeleton.html<CR>9jwf<i
 
-au bufnewfile,bufread *.css,*.html,*.js:
+au bufnewfile,bufread *.css,*.html,*.js,*.c:
 \ set tabstop=4 |
 \ set softtabstop=4 |
 \ set shiftwidth=4 |
 \ set autoindent |
 \ set expandtab |
 \ set fileformat=unix |
+\ set textwidth=150 |
 
 " console log shortcut
 imap ,cl console.log("")<Esc>==f(<right>a

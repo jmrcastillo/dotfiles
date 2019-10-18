@@ -1,8 +1,8 @@
 
 
 Install
-	- sudo apt install vim tmux curl ctags xclip
-
+	- sudo apt install git vim tmux curl ctags xclip
+	- htop tree
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

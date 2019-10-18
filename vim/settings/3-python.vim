@@ -13,4 +13,8 @@ au bufnewfile,bufread *.py
 \ set colorcolumn=80 |
 
 " shortcut python print
-imap ,pr print("")<ESC>==f(<right>a
+"imap ,pr print()<ESC>==f(<right>a
+imap ,pr print()<ESC>==f(a
+
+" shortcut if name == main
+imap ,inm if __name__ == "__main__":

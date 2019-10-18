@@ -64,6 +64,8 @@ call plug#end()
 " Python Mode
 filetype plugin indent on
 let g:pymode_python = 'python3'
+" Refactor
+nmap ,ref :h pymode-rope-refactoring
 
 " Python Syntax
 let g:python_highlight_all = 1
