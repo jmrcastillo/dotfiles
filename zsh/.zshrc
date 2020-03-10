@@ -155,7 +155,7 @@ source ~/dotfiles/zsh/keybindings.sh
 # git add message
 alias ga='git add'
 alias gaa='git add .'
-alias gst='git status'
+alias gst='git status -s'
 alias gcm='git commit -m'
 alias gcam='git commit -am'
 
@@ -165,8 +165,8 @@ alias gro='git reset --hard '
 alias gru='git reset --hard ORIG_HEAD'
 
 # git decorate
-alias gt='git log --graph --decorate --pretty=oneline --abbrev-commit -n 27'
-alias gta='git log --graph --decorate --pretty=oneline --abbrev-commit'
+alias gt='git --no-pager log --graph --decorate --pretty=oneline --abbrev-commit -n 27'
+alias gta='git --no-pager log --graph --decorate --pretty=oneline --abbrev-commit'
 
 # git push fetch pull
 alias gp='git push'
@@ -198,6 +198,7 @@ alias grs='git remote show '
 
 # git diff show in vim
 alias gdv='git diff . | vi -'
+alias gdf='git diff '
 
 # remove git
 alias grm='rm -rf .git'
