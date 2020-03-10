@@ -108,7 +108,8 @@ bindkey '^p' reverse-menu-complete
 #Python
 alias python='python3.6'
 alias python3='python3.6'
-alias pmo='python -m '
+alias pym='python -m '
+alias pyi='python -i '
 #alias pip='pip3'
 
 # virtualwrapper
@@ -134,9 +135,12 @@ alias psh='pipenv shell '
 alias prn='pipenv run python '
 alias pin='pipenv install '
 alias pgr='pipenv graph '
+# pip list
 alias pfr='pipenv lock -r '
+alias pli='pip list'
 alias plc='pipenv lock '
 alias pun='pipenv uninstall '
+alias prm='pipenv --rm '
 alias ext='exit'
 
 ## neovim
@@ -203,6 +207,8 @@ alias hrb="git commit --allow-empty -m 'empty commit' && git push heroku master"
 
 # IP
 alias ipc='ip -c a'
+alias ipr='ip route'
+alias ipm='ip maddr'
 
 ### TERMINAL SHORTCUT
 
@@ -213,6 +219,7 @@ alias sug='sudo apt-get upgrade '
 
 # Edit vim zsh
 alias vis='cd ~/dotfiles/vim/ && vi'
+alias nvs='cd ~/.config/nvim/ && nv init.vim'
 alias ezs='vi ~/dotfiles/zsh/.zshrc'
 alias etm='vi ~/.tmux.conf'
 
@@ -239,6 +246,7 @@ alias tas='tmux attach -t'
 
 # vim alias
 alias vi='vim'
+alias nv='nvim'
 
 # Tmuxinator
 export EDITOR='vim'

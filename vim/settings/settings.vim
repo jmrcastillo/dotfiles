@@ -22,8 +22,8 @@ colorscheme vim-material
 " color of nonText
 "hi NonText guibg=ivory4
 
-" auto scroll
-set scrolloff=18	" keep 3 lines below and above the cursor
+" cursor center
+set scrolloff=18
 
 " toggle transparent
 let t:is_transparent = 1
@@ -41,7 +41,7 @@ endfunction
 nnoremap <c-t> :call Toggle_transparent()
 
 set nocompatible
-filetype off
+filetype on
 
 " showing line numbers and length
 set nu			" show number

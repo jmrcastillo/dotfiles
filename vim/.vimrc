@@ -12,7 +12,7 @@ call plug#begin('~/.vim/plugged')
 "PlugDiff		- Examin Changes from previous update
 
 " Python
-Plug 'python-mode/python-mode', { 'branch': 'develop' }
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'majutsushi/tagbar'
 Plug 'vim-python/python-syntax'   " syntax highlight
 
@@ -30,12 +30,13 @@ Plug 'othree/svg-properties-syntax.vim'
 
 
 " Javascript
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'elzr/vim-json'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'prettier/vim-prettier'
+
 
 " Vim
 Plug 'itchyny/lightline.vim'  " same powerline
@@ -47,13 +48,54 @@ Plug 'vwxyutarooo/nerdtree-devicons-syntax'
 Plug 'airblade/vim-gitgutter'
 Plug 'severin-lemaignan/vim-minimap'
 
-"if has('nvim')
-	"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"else
-	"Plug 'Shougo/deoplete.nvim'
-	"Plug 'roxma/nvim-yarp'
-	"Plug 'roxma/vim-hug-neovim-rpc'
-"endif
+
+"" YouCompleteMe
+Plug 'ervandew/supertab'
+Plug 'ycm-core/youcompleteme'
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+"" Ultisnips
+Plug 'SirVer/ultisnips'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" Path
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
+
+" UltiSnips completion function that tries to expand a snippet. If there's no
+" snippet for expanding, it checks for completion window and if it's
+" shown, selects first element. If there's no completion window it tries to
+" jump to next placeholder. If there's no placeholder it just returns TAB key
+function! g:UltiSnips_Complete()
+    call UltiSnips_ExpandSnippet()
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            call UltiSnips_JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+               return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction
+
+exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+
+Plug 'honza/vim-snippets'
+
+" Autocomplete
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Install Plugin for coc
+" CocInstall coc-tabnine
+" CocInstall coc-python
+" CocUninstall coc-tabnine
+
+" CocList extension
 
 call plug#end()
 
@@ -139,12 +181,13 @@ highlight! link NERDTreeFlags NERDTreeDir
 nmap git :GitGutterToggle<CR>
 
 " minimap
+" leader mm, mc
 let g:minimap_highlight='Visual'
 
 "  -   -   -   -   -   -   -   -   -   -
 " Settings
 "  -   -   -   -   -   -   -   -   -   -
-
+syntax on
 " Seperate File
 "
 " Settings

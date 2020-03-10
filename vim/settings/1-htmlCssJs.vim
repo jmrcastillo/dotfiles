@@ -15,7 +15,7 @@ au bufnewfile,bufread *.css,*.html,*.js,*.c:
 \ set textwidth=150 |
 
 " console log shortcut
-imap ,cl console.log("")<Esc>==f(<right>a
+imap ,cl console.log()<Esc>==f(a
 " shortcut link js
 imap ,ljs <script src=".js"> </script><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
 " shortcut link css
@@ -36,4 +36,3 @@ augroup END
 
 " yaml
 au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-

@@ -12,3 +12,10 @@ ln -sv ~/dotfiles/tmux/.tmux.conf ~
 
 
 https://medium.com/@nikitavoloboev/pretty-and-fast-shell-97ea870f2805
+
+
+YouCompleteMe
+
+cd /.vim/plugged/youcompleteme
+
+python3 install.py
