@@ -48,7 +48,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'severin-lemaignan/vim-minimap'
 
 " Autocomplete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Install Plugin for coc
 " CocInstall coc-tabnine
 " CocInstall coc-python

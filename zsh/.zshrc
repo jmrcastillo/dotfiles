@@ -107,10 +107,28 @@ bindkey '^p' reverse-menu-complete
 
 #Python
 alias python='python3.6'
-alias python3='python3.6'
+alias py3='python3.6'
 alias pym='python -m '
 alias pyi='python -i '
+alias pyd='python -m pudb'
 #alias pip='pip3'
+
+# Django
+alias prs='python manage.py runserver'
+# Migrations
+alias pmm='python manage.py makemigrations'
+alias pmi='python manage.py migrate'
+alias pmsyn='python manage.py migrate --run-syncdb'
+# Run
+alias pms='python manage.py shell'
+alias pcs='python manage.py createsuperuser'
+# Project App
+alias psp='django-admin startproject'
+alias psa='python manage.py startapp'
+
+# Location of site pack and dist
+alias psp="cd /home/dm/.local/lib/python3.6/site-packages && nautilus ."
+alias pdp="cd /usr/lib/python3/dist-packages && nautilus ."
 
 # virtualwrapper
 #WORKON_HOME=~/Envs
@@ -242,6 +260,7 @@ alias pkl='pkill -f '
 # TMUX ALIASES
 alias tmx='tmux'
 alias tks='tmux kill-session -t'
+alias tka='pkill -f tmux'
 alias tls='tmux list-session'
 alias tas='tmux attach -t'
 
@@ -252,6 +271,23 @@ alias nv='nvim'
 # Tmuxinator
 export EDITOR='vim'
 #source ~/.bin/tmuxinator.zsh
+#
+# Gunicorn
+alias greload='systemctl daemon-reload'
+alias gstatus='sudo systemctl status gunicorn'
+alias gset='sudo vim /etc/systemd/system/gunicorn.service'
+
+
+# Nginx
+alias nstart='sudo service nginx start'
+alias nstop='sudo service nginx stop'
+# Enable and Restart
+alias nrestart='sudo service nginx restart'
+alias nenable='sudo systemctl enable  nginx'
+alias ntest='sudo nginx -t'
+alias nerror='sudo tail -F /var/log/nginx/error.log'
+alias nedit='sudo vi /etc/nginx/sites-available'
+alias nset='sudo vi /etc/nginx/sites-available'
 
 # zshrc vi mode
 #export KEYTIMEOUT=20

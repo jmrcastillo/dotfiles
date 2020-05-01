@@ -12,8 +12,11 @@ imap <C-s> <esc>:w<CR>a
 nmap <C-q> :q!<CR>
 imap <C-q> <esc>:q!<CR>
 
+" map leader
+let mapleader=" "
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=DarkCyan ctermfg=DarkCyan guifg=DarkCyan  guibg=DarkCyan
+
 " Color Scheme
-syntax on
 set t_Co=256
 set background=dark
 set termguicolors
@@ -24,6 +27,8 @@ colorscheme vim-material
 
 " cursor center
 set scrolloff=18
+nmap j jzz
+nmap k kzz
 
 " toggle transparent
 let t:is_transparent = 1
@@ -43,6 +48,14 @@ nnoremap <c-t> :call Toggle_transparent()
 set nocompatible
 filetype on
 
+" no swap file
+set noswapfile
+
+" Move
+vmap J :m '>+1<CR>gv=gv
+vmap K :m '<-2<CR>gv=gv
+
+
 " showing line numbers and length
 set nu			" show number
 set relativenumber 	" show relative line number
@@ -50,8 +63,8 @@ set nowrap		" don't automatically wrap on load
 set tw=79		" width of document (used by gd)
 
 " Finding Files
-" Search down into subfolders
-" Provides tab-completion for all file related tasks
+" search down into subfolders
+" provides tab-completion for all file related tasks
 set path+=**
 
 " Set Folding
@@ -71,17 +84,13 @@ augroup remember_folds
 augroup END
 
 " enable folding using spacebar
-nmap <space> za
+nmap <space>f za
 
 " Display all matching files when we tab complete
 set wildmenu
 
-" show whitespace
-" must be inserted before colorscheme command
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=DarkCyan ctermfg=DarkCyan guifg=DarkCyan  guibg=DarkCyan
-
-" highlight trailing whitespace
-match ErrorMsg '\s\+$'
+" Highgligh Search
+highlight Search ctermbg=DarkCyan ctermfg=DarkCyan  guifg=Black guibg=DarkCyan
 
 "remove trailing whitespaces automatically
 autocmd BufWritePre * :%s/\s\+$//e
@@ -114,6 +123,9 @@ nmap <silent> <c-k> :wincmd k <CR>
 nmap <silent> <c-l> :wincmd l <CR>
 nmap <silent> <c-h> :wincmd h <CR>
 
+" Open vsplit at right
+set splitright
+
 " select all
 map <c-a> ggVG <CR>
 
@@ -143,6 +155,29 @@ nmap <F10> :tabnext<CR>
 " move tab
 nmap m<F9> :tabmove -<CR>
 nmap m<F10> :tabmove +<CR>
+" or use leader jk
+nmap <leader>j :tabprevious<CR>
+nmap <leader>k :tabnext<CR>
+nmap <leader>h :tabr<CR>
+nmap <leader>l :tabl<CR>
+" Using arrow
+nmap <leader><Left> :tabprevious<CR>
+nmap <leader><Right> :tabnext<CR>
+nmap <leader><Up> :tabr<CR>
+nmap <leader><Down> :tabl<CR>
+" Arrow
+nmap <Left> :bp<CR>
+nmap <Right> :bn<CR>
+nmap <Up> 6kzz
+nmap <Down> 6jzz
+
+" tab number
+nmap <leader>1 1gt
+nmap <leader>2 2gt
+nmap <leader>3 3gt
+nmap <leader>4 4gt
+nmap <leader>5 5gt
+nmap <leader>6 6gt
 
 " go to the last tab
 if !exists('g:lasttab')

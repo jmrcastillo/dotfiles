@@ -10,6 +10,8 @@ ln -sv ~/dotfiles/zsh/.zshrc ~
 ln -sv ~/dotfiles/vim/.vimrc ~
 ln -sv ~/dotfiles/tmux/.tmux.conf ~
 
+ln -sv ~/dotfiles/neovim/init.vim ~/.config/nvim/
+
 
 https://medium.com/@nikitavoloboev/pretty-and-fast-shell-97ea870f2805
 

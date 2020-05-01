@@ -35,8 +35,13 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'elzr/vim-json'
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'prettier/vim-prettier'
+Plug 'prettier/vim-prettier',  { 'do': 'yarn install' }
 
+" live html, css and js
+"Plug 'turbio/bracey.vim'
+" then cd .vim/plugged/bracey.vim
+" and npm install --prefix server
+" Bracey - BraceyStop
 
 " Vim
 Plug 'itchyny/lightline.vim'  " same powerline
@@ -55,6 +60,8 @@ Plug 'ycm-core/youcompleteme'
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
+nmap  <leader>gd :YcmCompleter GoTo<CR>
+nmap  <leader>gf :YcmCompleter FixIt<CR>
 
 "" Ultisnips
 Plug 'SirVer/ultisnips'
@@ -123,6 +130,7 @@ nmap <F8> :TagbarToggle<CR>
 map <C-n> :NERDTreeToggle<CR>
 " Close vim if only nerdtree is open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+nmap <Leader>pv :NERDTreeFind<CR>
 
 " IndentLine
 let g:indentLine_setColors = 0
@@ -141,7 +149,21 @@ set wildignore+=*/coverage/*
 set laststatus=2
 let g:lightline = {
 	\ 'colorscheme': 'OldHope',
+	\ 'component_function': {
+	\   'filename': 'LightLineFileName',
 	\ }
+	\ }
+
+" lightline show full path
+function! LightLineFileName()
+	let root = fnamemodify(get(b:, 'git_dir'), ':h')
+	let path = expand('%:p')
+
+	if path[:len(root)-1] ==# root
+		return path[len(root)+1:]
+	endif
+	return expand('%')
+endfunction
 
 " closetag
 let g:closetag_filenames = '*.html,*.xhtml,*.css,*.js,*.jsx'

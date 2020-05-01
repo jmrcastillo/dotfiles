@@ -16,5 +16,8 @@ au bufnewfile,bufread *.py
 "imap ,pr print()<ESC>==f(<right>a
 imap ,pr print()<ESC>==f(a
 
+" pdbg
+nmap pdbg :!python3 %
+
 " shortcut if name == main
 imap ,inm if __name__ == "__main__":
