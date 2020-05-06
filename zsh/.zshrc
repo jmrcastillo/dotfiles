@@ -273,7 +273,8 @@ export EDITOR='vim'
 #source ~/.bin/tmuxinator.zsh
 #
 # Gunicorn
-alias greload='systemctl daemon-reload'
+alias grestart='systemctl daemon-reload'
+alias gsrestart='sudo systemctl restart gunicorn.service'
 alias gstatus='sudo systemctl status gunicorn'
 alias gset='sudo vim /etc/systemd/system/gunicorn.service'
 
