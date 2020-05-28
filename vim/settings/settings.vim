@@ -51,7 +51,7 @@ filetype on
 " no swap file
 set noswapfile
 
-" Move
+" Move Line
 vmap J :m '>+1<CR>gv=gv
 vmap K :m '<-2<CR>gv=gv
 

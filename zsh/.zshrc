@@ -280,15 +280,16 @@ alias gset='sudo vim /etc/systemd/system/gunicorn.service'
 
 
 # Nginx
-alias nstart='sudo service nginx start'
-alias nstop='sudo service nginx stop'
+alias nstart='sudo systemctl start nginx'
+alias nstop='sudo systemctl stop nginx'
 # Enable and Restart
-alias nrestart='sudo service nginx restart'
-alias nenable='sudo systemctl enable  nginx'
+alias nrestart='sudo systemctl restart nginx'
+alias nenable='sudo systemctl enable nginx'
 alias ntest='sudo nginx -t'
 alias nerror='sudo tail -F /var/log/nginx/error.log'
 alias nedit='sudo vi /etc/nginx/sites-available'
 alias nset='sudo vi /etc/nginx/sites-available'
+alias nstatus='sudo service nginx status'
 
 # zshrc vi mode
 #export KEYTIMEOUT=20
