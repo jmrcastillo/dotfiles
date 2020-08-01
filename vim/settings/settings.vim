@@ -166,8 +166,8 @@ nmap <leader><Right> :tabnext<CR>
 nmap <leader><Up> :tabr<CR>
 nmap <leader><Down> :tabl<CR>
 " Arrow
-nmap <Left> :bp<CR>
-nmap <Right> :bn<CR>
+"nmap <Left> :bp<CR>
+"nmap <Right> :bn<CR>
 nmap <Up> 6kzz
 nmap <Down> 6jzz
 
@@ -194,10 +194,10 @@ nmap <F5> :buffers<CR>:buffer<Space>
 nmap <F6> :vert sb<space>
 
 " Buffer List
-nmap <silent> bp :bp<CR>
-nmap <silent> bn :bn<CR>
-nmap <silent> bP :bfirst<CR>
-nmap <silent> bN :blast<CR>
+"nmap <silent> bp :bp<CR>
+"nmap <silent> bn :bn<CR>
+"nmap <silent> bP :bfirst<CR>
+"nmap <silent> bN :blast<CR>
 
 " Switch between window splits
 " and  expands the splits to full size

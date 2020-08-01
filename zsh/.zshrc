@@ -178,6 +178,7 @@ alias gcm='git commit -m'
 alias gcam='git commit -am'
 
 # git reset
+alias grf='git reflog'
 alias gre='git reset --hard HEAD~'
 alias gro='git reset --hard '
 alias gru='git reset --hard ORIG_HEAD'

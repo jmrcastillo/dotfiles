@@ -45,6 +45,7 @@ Plug 'prettier/vim-prettier',  { 'do': 'yarn install' }
 
 " Vim
 Plug 'itchyny/lightline.vim'  " same powerline
+Plug 'itchyny/vim-gitbranch'  " Show Git Branch in lightline
 Plug 'trevordmiller/nova-vim' " Color scheme for vim
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'     " find files
@@ -149,9 +150,15 @@ set wildignore+=*/coverage/*
 set laststatus=2
 let g:lightline = {
 	\ 'colorscheme': 'OldHope',
+	\ 'active': {
+	\   'left': [ ['mode', 'paste' ],
+	\	      ['gitbranch', 'readonly', 'filename', 'modified']
+ 	\           ]
+	\ },
 	\ 'component_function': {
 	\   'filename': 'LightLineFileName',
-	\ }
+	\   'gitbranch': 'gitbranch#name',
+	\ },
 	\ }
 
 " lightline show full path
@@ -168,9 +175,9 @@ endfunction
 " closetag
 let g:closetag_filenames = '*.html,*.xhtml,*.css,*.js,*.jsx'
 
-" emmet use ,,
+ "emmet use ,,
 let g:user_emmet_expandabbr_key = ',,'
-"imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 " javascript
 " vim javascript
