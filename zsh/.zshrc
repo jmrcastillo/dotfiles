@@ -106,8 +106,8 @@ bindkey '^n' expand-or-complete
 bindkey '^p' reverse-menu-complete
 
 #Python
-alias python='python3.6'
-alias py3='python3.6'
+alias python='python3.8'
+alias py3='python3.8'
 alias pym='python -m '
 alias pyi='python -i '
 alias pyd='python -m pudb'
@@ -220,7 +220,7 @@ alias gdv='git diff . | vi -'
 alias gdf='git diff '
 
 # remove git
-alias grm='rm -rf .git'
+#alias grm='rm -rf .git'
 
 # heroku
 alias hrb="git commit --allow-empty -m 'empty commit' && git push heroku master"
@@ -319,3 +319,47 @@ alias mnte='cd /mnt/e/0\ -\ Today\ IChoose\ 2019/Windows10'
 
 # jibreel@dm ~
 # PROMPT="%{$fg_bold[cyan]%} %n% ${PROMPT} "
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/dm/Documents/Google Cloud SDK/google-cloud-sdk-315.0.0-linux-x86_64/google-cloud-sdk/path.zsh.inc' ]; then . '/home/dm/Documents/Google Cloud SDK/google-cloud-sdk-315.0.0-linux-x86_64/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/dm/Documents/Google Cloud SDK/google-cloud-sdk-315.0.0-linux-x86_64/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/dm/Documents/Google Cloud SDK/google-cloud-sdk-315.0.0-linux-x86_64/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+# Android Studio - React Native
+# 8 Daniel
+#export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_202/jre/
+# 11
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# Gradle
+export PATH=$PATH:/opt/gradle/gradle-6.7.1/bin
+
+# NVM
+source ~/.nvm/nvm.sh
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$HOME/.npm-global/bin:$PATH"
+#
+# Node - Heap out of memory
+export NODE_OPTIONS=--max_old_space_size=4096
+
+# Brew
+export PATH="$HOME/.linuxbrew/bin:$PATH"
+export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+
+# set PATH so it includes user's private bin if it exists
+# Pip Version
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
