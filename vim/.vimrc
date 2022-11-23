@@ -69,6 +69,9 @@ Plug 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" React Typescript Snipptes
+Plug 'mlaursen/vim-react-snippets'
+
 " Path
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 
@@ -114,6 +117,8 @@ call plug#end()
 " Python Mode
 filetype plugin indent on
 let g:pymode_python = 'python3'
+" Ignore > 80 Line
+let g:pymode_lint_ignore="E501,W601"
 " Refactor
 nmap ,ref :h pymode-rope-refactoring
 
@@ -132,6 +137,7 @@ map <C-n> :NERDTreeToggle<CR>
 " Close vim if only nerdtree is open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 nmap <Leader>pv :NERDTreeFind<CR>
+let g:NERDTreeIgnore = ['^node_modules$', 'ios', 'android']
 
 " IndentLine
 let g:indentLine_setColors = 0
@@ -145,6 +151,9 @@ let g:ctrlp_working_path_mode=0
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
+set wildignore+=*/node_modules/*
+" let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
 
 " lightline
 set laststatus=2
@@ -196,7 +205,7 @@ let g:jsx_ext_required = 1
 
 " emmet html and css only
 let g:user_emmet_install_global = 1
-autocmd FileType html,css,js,jsx,htmldjango EmmetInstall
+autocmd FileType html,css,js,jsx,ts,htmldjango EmmetInstall
 
 " Vim json
 let g:vim_json_syntax_conceal = 0

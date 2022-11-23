@@ -31,19 +31,19 @@ nmap j jzz
 nmap k kzz
 
 " toggle transparent
-let t:is_transparent = 1
-function! Toggle_transparent()
-if t:is_transparent == 1
-	hi normal guibg=NONE ctermbg=NONE
-	let t:is_transparent = 0
+"let t:is_transparent = 1
+"function! Toggle_transparent()
+"if t:is_transparent == 1
+	"hi normal guibg=NONE ctermbg=NONE
+	"let t:is_transparent = 0
 
-else
-	set background=dark
-	let t:is_transparent = 1
-endif
-endfunction
+"else
+	"set background=dark
+	"let t:is_transparent = 1
+"endif
+"endfunction
 
-nnoremap <c-t> :call Toggle_transparent()
+"nnoremap <c-t> :call Toggle_transparent()
 
 set nocompatible
 filetype on
@@ -55,6 +55,12 @@ set noswapfile
 vmap J :m '>+1<CR>gv=gv
 vmap K :m '<-2<CR>gv=gv
 
+" No end of line
+set noeol
+set nofixeol
+
+" ctags
+nmap <C-Enter> <C-w><C-]><C-w>T
 
 " showing line numbers and length
 set nu			" show number
@@ -103,6 +109,7 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
+set autoread
 
 " remove highlight last search
 map <F4> :nohl <CR>

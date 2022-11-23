@@ -5,7 +5,7 @@
 "nmap ,html :-1read $HOME/.vim/.skeleton.html<CR>3jwf<i
 nmap ,html :-1read ~/dotfiles/vim/.skeleton.html<CR>9jwf<i
 
-au bufnewfile,bufread *.css,*.html,*.js,*.c:
+au bufnewfile,bufread *.css,*.html,*.js,*.c,*.ts,:
 \ set tabstop=4 |
 \ set softtabstop=4 |
 \ set shiftwidth=4 |
